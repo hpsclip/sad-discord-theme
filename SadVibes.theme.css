@@ -1,69 +1,84 @@
 /**
- * @name Melancholy Vibes
+ * @name Melancholy Clouds
  * @author hpsclip_fn
- * @version 1.2.0
- * @description A bulletproof rainy theme that forces total container transparency.
+ * @version 1.3.0
+ * @description A moody, overcast cloud theme with high-contrast cool text and full background visibility.
  * @source https://betterdiscord.app/
  */
 
+/* Main Theme Variables */
 :root {
-    /* Background Image - Lo-fi rainy night window gif */
-    --background-image: url('https://i.pinimg.com/originals/ba/4e/07/ba4e078ba192931a74d5386d4f5bf744.gif');
-    --background-blur: 2px;
-    
-    /* Global dark overlay tint to keep text highly readable over the rain */
-    --background-overlay: rgba(10, 14, 20, 0.85); 
+    /* Background Image - Somber, cinematic dark drifting clouds */
+    --background-image: url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=1920');
+    --background-blur: 0px;
 
-    /* Moody text color replacements */
-    --text-normal: #cfdad3 !important;
-    --text-muted: #80a397 !important;
-    --header-primary: #f1f7f4 !important;
-    --header-secondary: #80a397 !important;
-    --interactive-normal: #b5c4d2 !important;
+    /* A cool, dark slate-blue tint overlay to blend everything together */
+    --background-overlay: rgba(14, 18, 24, 0.75);
+
+    /* Text & Interactive Colors - Sharp, cool pale blues so nothing blends into the dark */
+    --text-normal: #d2dee6 !important;
+    --text-muted: #8ba3b5 !important;
+    --header-primary: #ffffff !important;
+    --header-secondary: #a3bac9 !important;
+    --interactive-normal: #b2c8d6 !important;
     --interactive-hover: #ffffff !important;
+    --interactive-active: #ffffff !important;
 }
 
-/* Force the gif onto the main app container window */
-html, body, #app-mount {
-    background: var(--background-image) center/cover no-repeat fixed !important;
-}
-
-/* Universal transparency wipe: This strips the solid backgrounds off of every main Discord container layout */
-#app-mount [class*="appAsidePanelWrapper"],
-#app-mount [class*="container"],
-#app-mount [class*="sidebar"],
-#app-mount [class*="chat"],
-#app-mount [class*="members"],
-#app-mount [class*="panels"],
-#app-mount [class*="privateChannels"],
-#app-mount [class*="scroller"],
-#app-mount [class*="pageWrapper"],
-#app-mount [class*="nowPlayingColumn"],
-#app-mount [class*="standardSidebarView"],
-#app-mount [class*="contentRegion"] {
+/* Core System Override - Forces the dark cloud background behind absolutely everything */
+#app-mount,
+body,
+html,
+[class*="appAsidePanelWrapper"],
+[class*="notDetected"],
+[class*="layer"],
+[class*="container"],
+[class*="chat"],
+[class*="sidebar"],
+[class*="membersWrap"],
+[class*="members"],
+[class*="privateChannels"],
+[class*="panels"],
+[class*="scroller"],
+[class*="pageWrapper"] {
     background: transparent !important;
 }
 
-/* Apply the dark moody glass tint layer directly over the background */
-#app-mount [class*="appAsidePanelWrapper"] {
+/* Attaches the cloud background image directly to the baseline window */
+#app-mount {
+    background: var(--background-image) center/cover no-repeat fixed !important;
+}
+
+/* Injects the cool tint overlay across the viewport */
+[class*="appAsidePanelWrapper"] {
     background: var(--background-overlay) !important;
     backdrop-filter: blur(var(--background-blur)) !important;
 }
 
-/* Force text and navigation links to use our high-contrast visible shades */
+/* Native Discord Dark Mode Color Overrides - Prevents default black panels from loading */
+.theme-dark {
+    --background-primary: transparent !important;
+    --background-secondary: transparent !important;
+    --background-secondary-alt: transparent !important;
+    --background-tertiary: transparent !important;
+    --background-floating: rgba(18, 24, 32, 0.95) !important;
+    --bg-overlay-chat: transparent !important;
+    --bg-overlay-surface-home: transparent !important;
+    
+    /* Replaces the text values natively */
+    --text-normal: var(--text-normal);
+    --text-muted: var(--text-muted);
+    --header-primary: var(--header-primary);
+    --header-secondary: var(--header-secondary);
+    --interactive-normal: var(--interactive-normal);
+    --interactive-hover: var(--interactive-hover);
+}
+
+/* Force-corrects user list and channel list name visibility */
 [class*="username"],
 [class*="name"],
 [class*="channelName"],
 [class*="title"],
 [class*="activityText"] {
     color: var(--text-normal) !important;
-}
-
-/* Dark theme style variables override */
-.theme-dark {
-    --background-primary: transparent !important;
-    --background-secondary: transparent !important;
-    --background-secondary-alt: transparent !important;
-    --background-tertiary: transparent !important;
-    --background-floating: rgba(15, 20, 28, 0.95) !important;
 }
