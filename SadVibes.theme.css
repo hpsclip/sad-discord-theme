@@ -1,84 +1,69 @@
 /**
  * @name Melancholy Vibes
  * @author hpsclip_fn
- * @version 1.1.0
- * @description A completely transparent, moody, rainy theme with readable pale text.
+ * @version 1.2.0
+ * @description A bulletproof rainy theme that forces total container transparency.
  * @source https://betterdiscord.app/
  */
 
 :root {
-    /* Background Image - Pure melancholic rainy window night vibe */
+    /* Background Image - Lo-fi rainy night window gif */
     --background-image: url('https://i.pinimg.com/originals/ba/4e/07/ba4e078ba192931a74d5386d4f5bf744.gif');
-    --background-blur: 3px;
+    --background-blur: 2px;
     
-    /* Dark, see-through overlay so text pops over the rain */
-    --background-overlay: rgba(10, 12, 16, 0.82); 
-    
-    /* Text Colors - Soft, moody pale tones (No more black text vanishing) */
-    --text-normal: #ceddd6 !important; 
-    --text-muted: #7fa99b !important;
-    --text-link: #4f8a8b !important;
-    --header-primary: #e4efe9 !important;
-    --header-secondary: #7fa99b !important;
-    --interactive-normal: #bccee0 !important;
+    /* Global dark overlay tint to keep text highly readable over the rain */
+    --background-overlay: rgba(10, 14, 20, 0.85); 
+
+    /* Moody text color replacements */
+    --text-normal: #cfdad3 !important;
+    --text-muted: #80a397 !important;
+    --header-primary: #f1f7f4 !important;
+    --header-secondary: #80a397 !important;
+    --interactive-normal: #b5c4d2 !important;
     --interactive-hover: #ffffff !important;
-    --interactive-active: #ffffff !important;
 }
 
-/* Force the background to apply across the entire app window */
-html, body, #app-mount, 
-.appAsidePanelWrapper__71726, 
-.container__5c40d, 
-.wrapper_bd21b1 {
+/* Force the gif onto the main app container window */
+html, body, #app-mount {
     background: var(--background-image) center/cover no-repeat fixed !important;
 }
 
-/* Layer the dark moody tint overlay */
-.appAsidePanelWrapper__71726Content {
+/* Universal transparency wipe: This strips the solid backgrounds off of every main Discord container layout */
+#app-mount [class*="appAsidePanelWrapper"],
+#app-mount [class*="container"],
+#app-mount [class*="sidebar"],
+#app-mount [class*="chat"],
+#app-mount [class*="members"],
+#app-mount [class*="panels"],
+#app-mount [class*="privateChannels"],
+#app-mount [class*="scroller"],
+#app-mount [class*="pageWrapper"],
+#app-mount [class*="nowPlayingColumn"],
+#app-mount [class*="standardSidebarView"],
+#app-mount [class*="contentRegion"] {
+    background: transparent !important;
+}
+
+/* Apply the dark moody glass tint layer directly over the background */
+#app-mount [class*="appAsidePanelWrapper"] {
     background: var(--background-overlay) !important;
     backdrop-filter: blur(var(--background-blur)) !important;
 }
 
-/* Nuke ALL solid black panels so the rain theme actually reveals itself */
-.layer__2efaa,
-.sidebar_ded4b5,
-.chat__52833,
-.container__133bf,
-.members__9a330,
-.membersWrap__90ca2,
-.nowPlayingColumn_b025fe,
-.container__2637a,
-.privateChannels__935e2,
-.panels__522da,
-.scroller__fb4b5,
-.bg__121bf,
-.container_b2ce93,
-.scroller__4b984,
-.pageWrapper_f12684,
-.scroller_c437da,
-.standardSidebarView__11e9b,
-.sidebarRegionScroller__8113e,
-.contentRegion__0bec1,
-.contentRegionScroller__86c73 {
-    background: transparent !important;
-}
-
-/* Force Discord to use our visible light-grey text instead of dark text on dark bg */
-.username_b59937,
-.name__8d1ec,
-.channelName__2195f,
-.title__360bd,
-.activityText__7a186,
-.text-alignment-labels,
-.text_cf9990 {
+/* Force text and navigation links to use our high-contrast visible shades */
+[class*="username"],
+[class*="name"],
+[class*="channelName"],
+[class*="title"],
+[class*="activityText"] {
     color: var(--text-normal) !important;
 }
 
-/* Unread channel indicator and mentions badge */
-.numberBadge__50b23 {
-    background-color: #5c6b73 !important;
-    color: #fff !important;
-}
-.unread__3b6e5 {
-    background-color: var(--text-muted) !important;
+/* Dark theme style variables override */
+.theme-dark {
+    --background-primary: transparent !important;
+    --background-secondary: transparent !important;
+    --background-secondary-alt: transparent !important;
+    --background-tertiary: transparent !important;
+    --background-floating: rgba(15, 20, 28, 0.95) !important;
 }
