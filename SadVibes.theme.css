@@ -1,44 +1,51 @@
-/**
- * @name Melancholy Clouds
- * @author hpsclip_fn
- * @version 1.4.0
- * @description ClearVision-powered dark drifting clouds theme with custom visible layout text.
- * @source https://github.com/ClearVision/ClearVision-v6
- */
+/* Core Layout Overrides - Strips solid dark mode panels on Vencord Web */
+body, #app-mount, 
+[class*="appAsidePanelWrapper"], 
+[class*="container"], 
+[class*="sidebar"], 
+[class*="chat"], 
+[class*="membersWrap"], 
+[class*="members"], 
+[class*="panels"], 
+[class*="privateChannels"], 
+[class*="scroller"], 
+[class*="pageWrapper"] {
+    background: transparent !important;
+}
 
-/* 1. IMPORTS THE STABLE CLEARVISION CORE ENGINE */
-@import url('https://clearvision.github.io/ClearVision-v6/main.css');
+/* Base Cloud Wallpaper Image */
+html {
+    background: url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=1920') center/cover no-repeat fixed !important;
+}
 
-/* 2. CUSTOMIZES THE ENGINE FOR THE SAD CLOUD VIBE */
-:root {
-    /* Background - Dark moody clouds */
-    --app-bg: url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=1920');
-    --app-blur: 0px;
-    
-    /* Panel brightness/shading (0.0 = completely black, 1.0 = clear glass) */
-    --app-shading: 0.15; 
+/* Faded dark blue-grey screen tint overlay */
+#app-mount {
+    background: rgba(14, 18, 24, 0.78) !important;
+}
 
-    /* Accent & Highlight Colors (Soft Melancholic Ice Blues) */
-    --main-color: #587280;
-    --hover-color: #7394a6;
-    --success-color: #435e55;
-    --danger-color: #6e4646;
-    --url-color: #6ba1b5;
+/* Overriding internal theme color blocks */
+.theme-dark {
+    --background-primary: transparent !important;
+    --background-secondary: transparent !important;
+    --background-secondary-alt: transparent !important;
+    --background-tertiary: transparent !important;
+    --background-floating: rgba(15, 20, 28, 0.9) !important;
+    --bg-overlay-chat: transparent !important;
+    --bg-overlay-surface-home: transparent !important;
+}
 
-    /* Status Colors */
-    --online-color: #618276;
-    --idle-color: #8c8260;
-    --dnd-color: #8c5e5e;
-    --streaming-color: #795e8c;
-    --offline-color: #4f535c;
+/* Bright pale-blue text contrast correction */
+[class*="username"],
+[class*="name"],
+[class*="channelName"],
+[class*="title"],
+[class*="activityText"],
+span[class*="text"] {
+    color: #d2dee6 !important;
+}
 
-    /* Text Color Fixes (Forces clear visibility over dark panels) */
-    --text-normal: #d2dee6;
-    --text-muted: #8ba3b5;
-    --header-primary: #ffffff;
-    --header-secondary: #a3bac9;
-    --channels-default: #8ba3b5;
-    --interactive-normal: #b2c8d6;
-    --interactive-hover: #ffffff;
-    --interactive-active: #ffffff;
+/* Desaturated secondary labels */
+[class*="description"], 
+[class*="muted"] {
+    color: #8ba3b5 !important;
 }
