@@ -1,51 +1,45 @@
-/* Core Layout Overrides - Strips solid dark mode panels on Vencord Web */
-body, #app-mount, 
-[class*="appAsidePanelWrapper"], 
-[class*="container"], 
-[class*="sidebar"], 
-[class*="chat"], 
-[class*="membersWrap"], 
-[class*="members"], 
-[class*="panels"], 
-[class*="privateChannels"], 
-[class*="scroller"], 
-[class*="pageWrapper"] {
-    background: transparent !important;
-}
+/**
+ * @name Melancholy Clouds (Vencord Web)
+ * @author hpsclip_fn
+ * @version 1.7.0
+ * @description Injects dark overcast clouds by overriding Discord's native theme tokens.
+ */
 
-/* Base Cloud Wallpaper Image */
-html {
+/* Force the clouds to stay locked behind everything */
+html, body, #app-mount {
     background: url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=1920') center/cover no-repeat fixed !important;
 }
 
-/* Faded dark blue-grey screen tint overlay */
-#app-mount {
-    background: rgba(14, 18, 24, 0.78) !important;
-}
-
-/* Overriding internal theme color blocks */
-.theme-dark {
+/* Overwrite Discord's native layout engine tokens so they are permanently transparent */
+:root, .theme-dark, .theme-light {
     --background-primary: transparent !important;
     --background-secondary: transparent !important;
     --background-secondary-alt: transparent !important;
     --background-tertiary: transparent !important;
-    --background-floating: rgba(15, 20, 28, 0.9) !important;
+    --background-accent: transparent !important;
+    --background-floating: rgba(15, 20, 28, 0.85) !important;
+    
+    /* Strips newer chat & home hub canvas layers */
     --bg-overlay-chat: transparent !important;
     --bg-overlay-surface-home: transparent !important;
+    --bg-overlay-selected: rgba(255, 255, 255, 0.05) !important;
+    
+    /* Adds a permanent dark moody filter over the app so white text is readable */
+    --background-modifier-accent: rgba(255, 255, 255, 0.06) !important;
+    --bg-base-primary: rgba(10, 14, 20, 0.75) !important;
+    --bg-base-secondary: rgba(10, 14, 20, 0.4) !important;
+    --bg-base-tertiary: rgba(5, 7, 10, 0.6) !important;
+
+    /* Text & Highlight Colors */
+    --text-normal: #d2dee6 !important;
+    --text-muted: #8ba3b5 !important;
+    --header-primary: #ffffff !important;
+    --header-secondary: #a3bac9 !important;
+    --interactive-normal: #b2c8d6 !important;
+    --interactive-hover: #ffffff !important;
 }
 
-/* Bright pale-blue text contrast correction */
-[class*="username"],
-[class*="name"],
-[class*="channelName"],
-[class*="title"],
-[class*="activityText"],
-span[class*="text"] {
-    color: #d2dee6 !important;
-}
-
-/* Desaturated secondary labels */
-[class*="description"], 
-[class*="muted"] {
-    color: #8ba3b5 !important;
+/* Keep the main content area softly tinted so messages are scannable */
+[class*="chatContent"] {
+    background: rgba(14, 18, 24, 0.4) !important;
 }
