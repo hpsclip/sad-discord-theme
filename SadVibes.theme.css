@@ -1,85 +1,84 @@
 /**
  * @name Melancholy Vibes
  * @author hpsclip_fn
- * @version 1.0.0
- * @description A somber, rainy, and desaturated theme for deep thoughts and sad music.
+ * @version 1.1.0
+ * @description A completely transparent, moody, rainy theme with readable pale text.
  * @source https://betterdiscord.app/
  */
 
-/* Root variables for colors and backgrounds */
 :root {
-    /* Background Image - Lo-fi rainy window vibe */
-    --background-image: url('https://images.unsplash.com/photo-1428908728789-d2de25dbd4e2?q=80&w=1920');
-    --background-blur: 4px;
+    /* Background Image - Pure melancholic rainy window night vibe */
+    --background-image: url('https://i.pinimg.com/originals/ba/4e/07/ba4e078ba192931a74d5386d4f5bf744.gif');
+    --background-blur: 3px;
     
-    /* Colors - Muted, desaturated greys and deep blues */
-    --background-overlay: rgba(15, 18, 22, 0.85); 
-    --main-color: #5c6b73; /* Muted slate grey/blue */
-    --accent-color: #93a8ac; /* Soft, faded ice blue */
-    --text-normal: #b0c4de; /* Dull light grey/blue text */
-    --text-muted: #6c7a89; /* Darker, faded text */
+    /* Dark, see-through overlay so text pops over the rain */
+    --background-overlay: rgba(10, 12, 16, 0.82); 
     
-    /* Scrollbars & Selections */
-    --scrollbar-color: rgba(255, 255, 255, 0.05);
-    --scrollbar-hover: rgba(255, 255, 255, 0.1);
+    /* Text Colors - Soft, moody pale tones (No more black text vanishing) */
+    --text-normal: #ceddd6 !important; 
+    --text-muted: #7fa99b !important;
+    --text-link: #4f8a8b !important;
+    --header-primary: #e4efe9 !important;
+    --header-secondary: #7fa99b !important;
+    --interactive-normal: #bccee0 !important;
+    --interactive-hover: #ffffff !important;
+    --interactive-active: #ffffff !important;
 }
 
-/* Apply the background image and overlay */
-body, #app-mount {
+/* Force the background to apply across the entire app window */
+html, body, #app-mount, 
+.appAsidePanelWrapper__71726, 
+.container__5c40d, 
+.wrapper_bd21b1 {
     background: var(--background-image) center/cover no-repeat fixed !important;
 }
 
-.appAsidePanelWrapper__71726 {
+/* Layer the dark moody tint overlay */
+.appAsidePanelWrapper__71726Content {
     background: var(--background-overlay) !important;
-    backdrop-filter: blur(var(--background-blur));
+    backdrop-filter: blur(var(--background-blur)) !important;
 }
 
-/* Make containers transparent so the background shows through */
+/* Nuke ALL solid black panels so the rain theme actually reveals itself */
 .layer__2efaa,
-.container__5c40d,
 .sidebar_ded4b5,
 .chat__52833,
 .container__133bf,
 .members__9a330,
 .membersWrap__90ca2,
 .nowPlayingColumn_b025fe,
-.container__2637a {
+.container__2637a,
+.privateChannels__935e2,
+.panels__522da,
+.scroller__fb4b5,
+.bg__121bf,
+.container_b2ce93,
+.scroller__4b984,
+.pageWrapper_f12684,
+.scroller_c437da,
+.standardSidebarView__11e9b,
+.sidebarRegionScroller__8113e,
+.contentRegion__0bec1,
+.contentRegionScroller__86c73 {
     background: transparent !important;
 }
 
-/* Soft, desaturated text and styling updates */
-.theme-dark {
-    --text-normal: var(--text-normal);
-    --text-muted: var(--text-muted);
-    --header-primary: var(--accent-color);
-    --header-secondary: var(--text-muted);
-    --channel-icon: var(--text-muted);
+/* Force Discord to use our visible light-grey text instead of dark text on dark bg */
+.username_b59937,
+.name__8d1ec,
+.channelName__2195f,
+.title__360bd,
+.activityText__7a186,
+.text-alignment-labels,
+.text_cf9990 {
+    color: var(--text-normal) !important;
 }
 
-/* Subtle accent color for unread badges and mentions */
-.mentionsBar__43a13, .mention__1afd3 {
-    background-color: rgba(147, 168, 172, 0.15) !important;
-    color: var(--accent-color) !important;
-}
-
+/* Unread channel indicator and mentions badge */
 .numberBadge__50b23 {
-    background-color: var(--main-color) !important;
-    opacity: 0.7;
+    background-color: #5c6b73 !important;
+    color: #fff !important;
 }
-
-/* Mute the active channel styling */
-.modeSelected__487d1 .link__95dc0 {
-    background-color: rgba(255, 255, 255, 0.05) !important;
-}
-.modeSelected__487d1 .name__8d1ec {
-    color: var(--accent-color) !important;
-}
-
-/* Soft scrollbars */
-::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-color) !important;
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background-color: var(--scrollbar-hover) !important;
+.unread__3b6e5 {
+    background-color: var(--text-muted) !important;
 }
